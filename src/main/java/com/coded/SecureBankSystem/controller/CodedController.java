@@ -1,11 +1,11 @@
 package com.coded.SecureBankSystem.controller;
 
-import org.springframework.http.ResponseEntity;
+import com.coded.SecureBankSystem.bo.Contact;
+import com.coded.SecureBankSystem.bo.FarewellRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class CodedController {

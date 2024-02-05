@@ -1,4 +1,4 @@
-package com.coded.SecureBankSystem.controller;
+package com.coded.SecureBankSystem.bo;
 
 public class Contact {
     private String name;
