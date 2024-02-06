@@ -5,6 +5,7 @@ public class CreateUserRequest {
     private String name;
     private String email;
     private String phone;
+    private String status ;
 
     public String getStatus() {
         return status;
@@ -14,7 +15,7 @@ public class CreateUserRequest {
         this.status = status;
     }
 
-    private String status ;
+
     public java.lang.String getName() {
         return name;
     }

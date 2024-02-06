@@ -1,6 +1,6 @@
 package com.coded.SecureBankSystem.entity;
 
-import com.coded.SecureBankSystem.bo.user.Status;
+import com.coded.SecureBankSystem.util.enums.Status;
 
 import javax.persistence.*;
 
@@ -23,16 +23,10 @@ public class UserEntity {
 
     private java.lang.String email;
 
-    public Status getStatus() {
-        return status;
-    }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status",nullable = false)
     private Status status;
     public java.lang.String getEmail() {
         return email;
@@ -64,6 +58,14 @@ public class UserEntity {
 
     public void setName(java.lang.String name) {
         this.name = name;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 

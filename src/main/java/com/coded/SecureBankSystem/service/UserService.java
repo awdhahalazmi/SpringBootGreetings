@@ -1,12 +1,9 @@
 package com.coded.SecureBankSystem.service;
 
 import com.coded.SecureBankSystem.bo.user.CreateUserRequest;
-import com.coded.SecureBankSystem.bo.user.Status;
-import com.coded.SecureBankSystem.entity.UserEntity;
-
-import java.util.List;
+import com.coded.SecureBankSystem.bo.user.UpdateUserRequest;
 
 public interface UserService {
     void saveUser(CreateUserRequest createUserRequest);
-    //void status (Status status);
+     void updateUserStatus(UpdateUserRequest updateUserRequest);
 }
