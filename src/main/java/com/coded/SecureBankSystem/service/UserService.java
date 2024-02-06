@@ -5,5 +5,5 @@ import com.coded.SecureBankSystem.bo.user.UpdateUserRequest;
 
 public interface UserService {
     void saveUser(CreateUserRequest createUserRequest);
-     void updateUserStatus(UpdateUserRequest updateUserRequest);
+     void updateUserStatus(Long userId,UpdateUserRequest updateUserRequest);
 }

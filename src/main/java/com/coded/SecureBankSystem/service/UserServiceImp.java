@@ -30,10 +30,10 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void updateUserStatus(UpdateUserRequest updateUserRequest) {
-        UserEntity userEntity = userRepository.findById(updateUserRequest.getUserId())
+    public void updateUserStatus(Long userId,UpdateUserRequest updateUserRequest) {
+        UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow();
-        if(!updateUserRequest.getStatus().equals("ACTIVE")||!updateUserRequest.getStatus().equals("INACTIVE")){
+        if(!updateUserRequest.getStatus().equals("ACTIVE") && !updateUserRequest.getStatus().equals("INACTIVE")){
             throw new IllegalArgumentException("Status should be written either ACTIVE or INACTIVE");
 
         }

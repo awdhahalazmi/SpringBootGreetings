@@ -2,6 +2,7 @@ package com.coded.SecureBankSystem.controller.userController;
 
 
 import com.coded.SecureBankSystem.bo.user.CreateUserRequest;
+import com.coded.SecureBankSystem.bo.user.UpdateUserRequest;
 import com.coded.SecureBankSystem.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,18 @@ public class UserController {
         //userService.saveUser(createUserRequest);
         return ResponseEntity.ok("A User Has Been Created");
     }
+    @PutMapping("/update")
 
+public  ResponseEntity<String>updateUser(@RequestParam Long userId,@RequestBody UpdateUserRequest updateUserRequest){
+    try {
+        userService.updateUserStatus(userId, updateUserRequest);
+
+
+    }catch (IllegalArgumentException e){
+//            System.out.println("Error please write ACTIVE or INACTIVE");
+        return ResponseEntity.badRequest().body("Error");
+    }
+    return ResponseEntity.ok("A User Has Been Updated");
 }
+ }
 
