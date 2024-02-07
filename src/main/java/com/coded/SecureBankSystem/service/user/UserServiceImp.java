@@ -1,7 +1,7 @@
-package com.coded.SecureBankSystem.service;
+package com.coded.SecureBankSystem.service.user;
 
 import com.coded.SecureBankSystem.bo.user.CreateUserRequest;
-import com.coded.SecureBankSystem.bo.user.UpdateUserRequest;
+import com.coded.SecureBankSystem.bo.user.UpdateUserStatusRequest;
 import com.coded.SecureBankSystem.util.enums.Status;
 import com.coded.SecureBankSystem.entity.UserEntity;
 import com.coded.SecureBankSystem.repository.UserRepository;
@@ -30,14 +30,14 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void updateUserStatus(Long userId,UpdateUserRequest updateUserRequest) {
+    public void updateUserStatus(Long userId, UpdateUserStatusRequest updateUserStatusRequest) {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow();
-        if(!updateUserRequest.getStatus().equals("ACTIVE") && !updateUserRequest.getStatus().equals("INACTIVE")){
+        if(!updateUserStatusRequest.getStatus().equals("ACTIVE") && !updateUserStatusRequest.getStatus().equals("INACTIVE")){
             throw new IllegalArgumentException("Status should be written either ACTIVE or INACTIVE");
 
         }
-        userEntity.setStatus(Status.valueOf(updateUserRequest.getStatus()));
+        userEntity.setStatus(Status.valueOf(updateUserStatusRequest.getStatus()));
         userRepository.save(userEntity);
     }
 

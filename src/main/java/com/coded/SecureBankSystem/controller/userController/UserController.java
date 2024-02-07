@@ -2,8 +2,8 @@ package com.coded.SecureBankSystem.controller.userController;
 
 
 import com.coded.SecureBankSystem.bo.user.CreateUserRequest;
-import com.coded.SecureBankSystem.bo.user.UpdateUserRequest;
-import com.coded.SecureBankSystem.service.UserService;
+import com.coded.SecureBankSystem.bo.user.UpdateUserStatusRequest;
+import com.coded.SecureBankSystem.service.user.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +30,9 @@ public class UserController {
     }
     @PutMapping("/update")
 
-public  ResponseEntity<String>updateUser(@RequestParam Long userId,@RequestBody UpdateUserRequest updateUserRequest){
+public  ResponseEntity<String>updateUser(@RequestParam Long userId,@RequestBody UpdateUserStatusRequest updateUserStatusRequest){
     try {
-        userService.updateUserStatus(userId, updateUserRequest);
+        userService.updateUserStatus(userId, updateUserStatusRequest);
 
 
     }catch (IllegalArgumentException e){

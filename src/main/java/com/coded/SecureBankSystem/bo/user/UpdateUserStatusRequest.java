@@ -1,6 +1,6 @@
 package com.coded.SecureBankSystem.bo.user;
 
-public class UpdateUserRequest {
+public class UpdateUserStatusRequest {
 
     private Long userId;
     private String status;

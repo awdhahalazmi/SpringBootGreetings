@@ -1,5 +1,6 @@
 package com.coded.SecureBankSystem.entity;
 
+import com.coded.SecureBankSystem.util.enums.Roles;
 import com.coded.SecureBankSystem.util.enums.Status;
 
 import javax.persistence.*;
@@ -28,6 +29,26 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status",nullable = false)
     private Status status;
+
+
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
+
+    @Enumerated(EnumType.STRING)
+@OneToOne
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
+
+
+    @Column(nullable = false)
+    private String password;
+    @Column(name = "username",nullable = false)
+    private String username;
     public java.lang.String getEmail() {
         return email;
     }
@@ -67,5 +88,23 @@ public class UserEntity {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
 }
 
