@@ -7,6 +7,9 @@ import com.coded.SecureBankSystem.entity.UserEntity;
 import com.coded.SecureBankSystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImp implements UserService{
     private final UserRepository userRepository;
@@ -41,7 +44,13 @@ public class UserServiceImp implements UserService{
         userRepository.save(userEntity);
     }
 
-
+    @Override
+    public List<String> getALlUsersWithStrongPassword() {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getPassword().length() > 8)
+                .map(UserEntity::getName)
+                .collect(Collectors.toList());
+    }
 
 
 

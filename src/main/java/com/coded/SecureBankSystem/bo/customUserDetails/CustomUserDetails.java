@@ -1,5 +1,6 @@
 package com.coded.SecureBankSystem.bo.customUserDetails;
 
+import com.coded.SecureBankSystem.entity.RoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
