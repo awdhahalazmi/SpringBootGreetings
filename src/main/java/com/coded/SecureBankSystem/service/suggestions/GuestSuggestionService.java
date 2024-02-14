@@ -1,5 +1,6 @@
 package com.coded.SecureBankSystem.service.suggestions;
 
+import com.coded.SecureBankSystem.bo.suggestion.CreateSuggestionRequest;
 import com.coded.SecureBankSystem.entity.GuestSuggestionEntity;
 import com.coded.SecureBankSystem.repository.GuestSuggestionRepository;
 import com.coded.SecureBankSystem.util.enums.SuggestionsStatus;
@@ -10,22 +11,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GuestSuggestionService {
+public class GuestSuggestionService implements SuggestionService {
 
-    private GuestSuggestionRepository suggestionRepository ;
+    private final GuestSuggestionRepository suggestionRepository ;
 
-    @Autowired
     public GuestSuggestionService(GuestSuggestionRepository suggestionRepository) {
         this.suggestionRepository = suggestionRepository;
     }
 
-    SuggestionProcessor processSuggestion = suggestionText -> {
 
-        GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
-        suggestionEntity.setSuggestionText(suggestionText);
 
-        suggestionRepository.save(suggestionEntity);
-    };
+
+
     public List<GuestSuggestionEntity> findAllDataSuggestions() {
         List<GuestSuggestionEntity> allSuggestions = suggestionRepository.findAll();
         return allSuggestions.stream()
@@ -38,9 +35,51 @@ public class GuestSuggestionService {
 
     }
     public List<GuestSuggestionEntity> findAllCreatedSuggestions(){
-        return suggestionRepository.findByStatus(SuggestionsStatus.CREATE);
+        return suggestionRepository.findBySuggestionsStatus(SuggestionsStatus.CREATE);
     }
     public List<GuestSuggestionEntity> findAllRemovedSuggestions(){
-        return suggestionRepository.findByStatus(SuggestionsStatus.REMOVE);
+        return suggestionRepository.findBySuggestionsStatus(SuggestionsStatus.REMOVE);
+    }
+
+//    @Override
+//    public void processSuggestion(CreateSuggestionRequest suggestionTex) {
+//      SuggestionService processSuggestion = suggestionText -> {
+//
+//            GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
+//            suggestionEntity.setSuggestionText(suggestionTex.getSuggestionText());
+//
+//            suggestionRepository.save(suggestionEntity);
+//        };
+//    }
+
+
+    public void processSuggestion(CreateSuggestionRequest suggestionTex) {
+        ProcessSuggestion processSuggestion = suggest -> {
+            GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
+            suggestionEntity.setSuggestionText(suggestionEntity.getSuggestionText());
+            suggestionRepository.save(suggestionEntity);
+        };
+    }
+
+    @Override
+    public void getSuggestionRate() {
+
+
+    }
+
+    @Override
+    public List<GuestSuggestionEntity> getCreateStatusSuggestions() {
+        return suggestionRepository.findAll().stream()
+                .filter(suggestion -> suggestion.getSuggestionsStatus().equals(SuggestionsStatus.CREATE))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<GuestSuggestionEntity> getRemoveStatusSuggestions() {
+        return suggestionRepository.findAll().stream()
+                .filter(suggestion -> suggestion.getSuggestionsStatus().equals(SuggestionsStatus.REMOVE))
+                .collect(Collectors.toList());
+
     }
 }

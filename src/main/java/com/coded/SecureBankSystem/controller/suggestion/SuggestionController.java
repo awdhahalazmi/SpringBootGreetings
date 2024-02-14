@@ -29,4 +29,9 @@ public class SuggestionController {
         List<GuestSuggestionEntity> suggestionList = suggestionService.printAndProcessSuggestion(suggestionRequest.getSuggestionText());
         return ResponseEntity.ok(suggestionList);
     }
+    @PostMapping("/cretae-suggestion")
+    public ResponseEntity<String> processSuggestion(CreateSuggestionRequest suggestionTex){
+        suggestionService.processSuggestion(suggestionTex);
+        return ResponseEntity.ok("bravo you create a suggestion");
+    }
 }
