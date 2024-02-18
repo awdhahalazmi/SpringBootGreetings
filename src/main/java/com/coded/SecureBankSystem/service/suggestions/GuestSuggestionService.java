@@ -35,10 +35,10 @@ public class GuestSuggestionService implements SuggestionService {
 
     }
     public List<GuestSuggestionEntity> findAllCreatedSuggestions(){
-        return suggestionRepository.findBySuggestionsStatus(SuggestionsStatus.CREATE);
+        return suggestionRepository.findByStatus(SuggestionsStatus.CREATE);
     }
     public List<GuestSuggestionEntity> findAllRemovedSuggestions(){
-        return suggestionRepository.findBySuggestionsStatus(SuggestionsStatus.REMOVE);
+        return suggestionRepository.findByStatus(SuggestionsStatus.REMOVE);
     }
 
 //    @Override
@@ -69,16 +69,13 @@ public class GuestSuggestionService implements SuggestionService {
 
     @Override
     public List<GuestSuggestionEntity> getCreateStatusSuggestions() {
-        return suggestionRepository.findAll().stream()
-                .filter(suggestion -> suggestion.getSuggestionsStatus().equals(SuggestionsStatus.CREATE))
-                .collect(Collectors.toList());
-
+        return suggestionRepository.findByStatus(SuggestionsStatus.CREATE);
     }
 
     @Override
     public List<GuestSuggestionEntity> getRemoveStatusSuggestions() {
         return suggestionRepository.findAll().stream()
-                .filter(suggestion -> suggestion.getSuggestionsStatus().equals(SuggestionsStatus.REMOVE))
+                .filter(suggestion -> suggestion.getStatus().equals(SuggestionsStatus.REMOVE))
                 .collect(Collectors.toList());
 
     }

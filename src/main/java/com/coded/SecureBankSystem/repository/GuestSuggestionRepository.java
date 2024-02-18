@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface GuestSuggestionRepository extends JpaRepository<GuestSuggestionEntity,Long> {
-    List<GuestSuggestionEntity> findBySuggestionsStatus(SuggestionsStatus status);
+    List<GuestSuggestionEntity> findByStatus(SuggestionsStatus status);
 
 }

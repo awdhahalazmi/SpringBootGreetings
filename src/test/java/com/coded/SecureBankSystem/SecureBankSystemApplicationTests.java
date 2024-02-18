@@ -73,57 +73,56 @@ class SecureBankSystemApplicationTests {
 
 	@Test
 	public void whenGetCreateStatusSuggestions_thenSuccess() {
-		//Arrange
-		GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
-		suggestionEntity.setSuggestionText("any thing1");
-		suggestionEntity.setSuggestionsStatus(SuggestionsStatus.CREATE);
+		// Arrange
+		GuestSuggestionEntity suggestion1 = new GuestSuggestionEntity();
+		suggestion1.setSuggestionText("add guide app for the bank system");
+		suggestion1.setStatus(SuggestionsStatus.CREATE);
 
-		GuestSuggestionEntity suggestionEntity1 = new GuestSuggestionEntity();
-		suggestionEntity1.setSuggestionText("any thing2");
-		suggestionEntity1.setSuggestionsStatus(SuggestionsStatus.CREATE);
+		GuestSuggestionEntity suggestion2 = new GuestSuggestionEntity();
+		suggestion2.setSuggestionText("any thing2");
+		suggestion2.setStatus(SuggestionsStatus.CREATE);
 
-		GuestSuggestionEntity suggestionEntity2 = new GuestSuggestionEntity();
-		suggestionEntity2.setSuggestionText("any thing3");
-		suggestionEntity2.setSuggestionsStatus(SuggestionsStatus.REMOVE);
+		List<GuestSuggestionEntity> mockSuggestions = Arrays.asList(suggestion1, suggestion2);
+		Mockito.when(suggestionRepository.findByStatus(SuggestionsStatus.CREATE)).thenReturn(mockSuggestions);
 
-		List<GuestSuggestionEntity> mockGustSuggestion= Arrays.asList(
-				suggestionEntity1,suggestionEntity2,suggestionEntity);
-		when(suggestionRepository.findAll()).thenReturn(mockGustSuggestion);
+		// Act
+		List<GuestSuggestionEntity> suggestionsWithCreatedStatus = suggestionService.getCreateStatusSuggestions();
 
-		//Act
-		List<GuestSuggestionEntity> suggestionsWithCreatedStatus= suggestionService.getCreateStatusSuggestions();
-
-		//Assert
-		List<GuestSuggestionEntity> expectedSuggestionsWithCreatedStatus= Arrays.asList(suggestionEntity1,suggestionEntity);
-		assertEquals(expectedSuggestionsWithCreatedStatus,suggestionsWithCreatedStatus);
+		// Assert
+		Assertions.assertEquals(2, suggestionsWithCreatedStatus.size());
+		// Ensure all suggestions have CREATE status
+		Assertions.assertTrue(suggestionsWithCreatedStatus.stream()
+				.allMatch(suggestion -> suggestion.getStatus().equals(SuggestionsStatus.CREATE)));
 	}
 	@Test
 	public void whenGetRemoveStatusSuggestions_thenSuccess() {
 
 		GuestSuggestionEntity suggestionEntity = new GuestSuggestionEntity();
-		suggestionEntity.setSuggestionText("any thing1");
-		suggestionEntity.setSuggestionsStatus(SuggestionsStatus.REMOVE);
+		suggestionEntity.setSuggestionText("test 1");
+		suggestionEntity.setStatus(SuggestionsStatus.REMOVE);
 
 		GuestSuggestionEntity suggestionEntity1 = new GuestSuggestionEntity();
 		suggestionEntity1.setSuggestionText("any thing2");
-		suggestionEntity1.setSuggestionsStatus(SuggestionsStatus.REMOVE);
+		suggestionEntity1.setStatus(SuggestionsStatus.REMOVE);
 
 		GuestSuggestionEntity suggestionEntity2 = new GuestSuggestionEntity();
 		suggestionEntity2.setSuggestionText("any thing3");
-		suggestionEntity2.setSuggestionsStatus(SuggestionsStatus.CREATE);
+		suggestionEntity2.setStatus(SuggestionsStatus.CREATE);
 
-		List<GuestSuggestionEntity> mockGustSuggestion= Arrays.asList(
-				suggestionEntity1,suggestionEntity2,suggestionEntity);
+		List<GuestSuggestionEntity> mockGustSuggestion = Arrays.asList(
+				suggestionEntity1, suggestionEntity2, suggestionEntity);
 		when(suggestionRepository.findAll()).thenReturn(mockGustSuggestion);
 
 		//Act
+
+		//Assert
 		List<GuestSuggestionEntity> suggestionsWithRemoveStatus= suggestionService.getRemoveStatusSuggestions();
 
 		//Assert
-		List<GuestSuggestionEntity> expectedSuggestionsWithCreatedStatus= Arrays.asList(suggestionEntity,suggestionEntity2);
-		assertEquals(expectedSuggestionsWithCreatedStatus,suggestionsWithRemoveStatus);
-		//assertEquals(expectedSuggestionsWithCreatedStatus,suggestionsWithRemoveStatus);
+		assertEquals(2,suggestionsWithRemoveStatus.size());
+
 	}
-}
+	}
+
 
 

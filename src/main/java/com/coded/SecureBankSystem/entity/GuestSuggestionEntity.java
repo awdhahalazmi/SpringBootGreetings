@@ -22,7 +22,7 @@ public class GuestSuggestionEntity {
     private String suggestionText;
     @Enumerated(EnumType.STRING)
     @Column(name = "suggestion_status",nullable = false)
-    private SuggestionsStatus suggestionsStatus;
+    private SuggestionsStatus status;
 
 
 
@@ -51,11 +51,11 @@ public class GuestSuggestionEntity {
         this.suggestionText = suggestionText;
     }
 
-    public SuggestionsStatus getSuggestionsStatus() {
-        return suggestionsStatus;
+    public SuggestionsStatus getStatus() {
+        return status;
     }
 
-    public void setSuggestionsStatus(SuggestionsStatus suggestionsStatus) {
-        this.suggestionsStatus = suggestionsStatus;
+    public void setStatus(SuggestionsStatus status) {
+        this.status = status;
     }
 }
